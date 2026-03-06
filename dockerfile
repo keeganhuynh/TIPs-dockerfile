@@ -12,9 +12,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /workspace
 
-RUN git clone https://github.com/keeganhuynh/TIPs-containerized.git
+RUN git clone https://github.com/keeganhuynh/TIPs-containerized.git \
+    && mv /workspace/TIPs-containerized /workspace/TIPs
 
-WORKDIR /workspace/TIPs-containerized
+WORKDIR /workspace/TIPs
 
 RUN python -m pip install --upgrade pip \
  && pip install "mamba-ssm[causal-conv1d]" --no-build-isolation
@@ -27,10 +28,10 @@ RUN pip install gdown \
     && unzip -q /tmp/nnResults.zip -d /tmp/nnResults_unzipped \
     && rm -f /tmp/nnResults.zip
 
-RUN mkdir -p /workspace/TIPs-containerized/TIPs/nnResults \
-    && cp -r /tmp/nnResults_unzipped/* /workspace/TIPs-containerized/TIPs/nnResults/ \
+RUN mkdir -p /workspace/TIPs/nnResults \
+    && cp -r /tmp/nnResults_unzipped/* /workspace/TIPs/nnResults/ \
     && rm -rf /tmp/nnResults_unzipped
 
-WORKDIR /workspace/TIPs-containerized/TIPs
+WORKDIR /workspace/TIPs
 
 CMD ["bash"]
