@@ -21,8 +21,3 @@ RUN python -m pip install --upgrade pip \
  && pip install "mamba-ssm[causal-conv1d]" --no-build-isolation
 
 RUN pip install -e .
-
-
-# Downloading and loading the model
-RUN chmod +x /TIPs/initialize.sh
-CMD ["/bin/bash", "-c", "/TIPs/initialize.sh"]
