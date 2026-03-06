@@ -22,16 +22,9 @@ RUN python -m pip install --upgrade pip \
 
 RUN pip install -e .
 
-RUN pip install gdown \
-    && gdown "1UuFgZ-kwRryPC-vK7w64xX0VO4iOAeGt" -O /tmp/nnResults.zip \
-    && [ $(stat -c%s /tmp/nnResults.zip) -gt 100000 ] || (echo "ERROR: Download failed or file too small" && exit 1) \
-    && unzip -q /tmp/nnResults.zip -d /tmp/nnResults_unzipped \
-    && rm -f /tmp/nnResults.zip
-
-RUN mkdir -p /workspace/TIPs/nnResults \
-    && cp -r /tmp/nnResults_unzipped/* /workspace/TIPs/nnResults/ \
-    && rm -rf /tmp/nnResults_unzipped
-
 WORKDIR /workspace/TIPs
 
+RUN chmod +x /workspace/TIPs/initialize.sh
+
+ENTRYPOINT ["/workspace/TIPs/initialize.sh"]
 CMD ["bash"]
