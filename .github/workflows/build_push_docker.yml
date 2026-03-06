@@ -3,7 +3,7 @@ name: ci
 on:
   push:
     branches:
-      - "main"
+      - "build_inference_image"
 
 jobs:
   docker:
