@@ -10,21 +10,19 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     git curl ca-certificates unzip \
   && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /workspace
+WORKDIR /
 
 RUN git clone https://github.com/keeganhuynh/TIPs-containerized.git \
-    && mv /workspace/TIPs-containerized /workspace/TIPs
+    && mv /TIPs-containerized /TIPs
 
-WORKDIR /workspace/TIPs
+WORKDIR /TIPs
 
 RUN python -m pip install --upgrade pip \
  && pip install "mamba-ssm[causal-conv1d]" --no-build-isolation
 
 RUN pip install -e .
 
-WORKDIR /workspace/TIPs
+RUN chmod +x /TIPs/initialize.sh
 
-RUN chmod +x /workspace/TIPs/initialize.sh
-
-ENTRYPOINT ["/workspace/TIPs/initialize.sh"]
+ENTRYPOINT ["/TIPs/initialize.sh"]
 CMD ["bash"]
