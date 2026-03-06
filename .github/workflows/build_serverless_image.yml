@@ -1,6 +1,7 @@
-name: ci
+name: Build Serverless Image
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - "build_serverless_image"

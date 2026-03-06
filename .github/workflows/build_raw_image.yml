@@ -1,6 +1,7 @@
-name: ci
+name: Build Raw Image
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - "build_raw_image"

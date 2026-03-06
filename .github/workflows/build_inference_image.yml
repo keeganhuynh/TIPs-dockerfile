@@ -1,6 +1,7 @@
-name: ci
+name: Build Inference Image
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - "build_inference_image"
