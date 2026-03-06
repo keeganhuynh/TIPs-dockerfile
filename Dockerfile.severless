@@ -1,0 +1,8 @@
+FROM hhkhanh/tips_image:raw
+
+RUN pip install --quiet gdown \
+ && gdown "1UuFgZ-kwRryPC-vK7w64xX0VO4iOAeGt" -O /tmp/nnResults.zip \
+ && mkdir -p /tmp/nnResults_unzipped \
+ && unzip -q /tmp/nnResults.zip -d /tmp/nnResults_unzipped \
+ && mv /tmp/nnResults_unzipped/nnResults /TIPs/nnResults \
+ && rm -rf /tmp/nnResults.zip /tmp/nnResults_unzipped

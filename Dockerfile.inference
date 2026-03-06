@@ -1,26 +1,4 @@
-FROM runpod/pytorch:2.4.0-py3.11-cuda12.4.1-devel-ubuntu22.04
-
-SHELL ["/bin/bash", "-lc"]
-
-ENV DEBIAN_FRONTEND=noninteractive \
-    PIP_NO_CACHE_DIR=1 \
-    PYTHONUNBUFFERED=1
-
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    git curl ca-certificates unzip \
-  && rm -rf /var/lib/apt/lists/*
-
-WORKDIR /
-
-RUN git clone https://github.com/keeganhuynh/TIPs-containerized.git \
-    && mv /TIPs-containerized /TIPs
-
-WORKDIR /TIPs
-
-RUN python -m pip install --upgrade pip \
- && pip install "mamba-ssm[causal-conv1d]" --no-build-isolation
-
-RUN pip install -e .
+FROM hhkhanh/tips_image:raw
 
 RUN pip install jupyterlab
 

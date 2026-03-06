@@ -3,8 +3,8 @@ name: ci
 on:
   push:
     branches:
-      - "build_inference_image"
-      
+      - "build_serverless_image"
+
 jobs:
   docker:
     runs-on: ubuntu-latest
@@ -24,6 +24,6 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          file: ./Dockerfile.inference
-          tags: "${{ vars.DOCKER_USER }}/tips_image:inference"
+          file: ./Dockerfile.serverless
+          tags: "${{ vars.DOCKER_USER }}/tips_image:serverless"
           push: true
