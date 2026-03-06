@@ -22,7 +22,10 @@ RUN python -m pip install --upgrade pip \
 
 RUN pip install -e .
 
+RUN pip install jupyterlab
+
 RUN chmod +x /TIPs/initialize.sh
 
-ENTRYPOINT ["/TIPs/initialize.sh"]
-CMD ["bash"]
+EXPOSE 8888
+
+CMD ["/bin/bash", "-c", "/TIPs/initialize.sh && jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root --ServerApp.token= --ServerApp.password="]
