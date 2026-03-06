@@ -26,6 +26,6 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: ./Dockerfile.serverless
+          file: Dockerfile.serverless
           tags: "${{ vars.DOCKER_USER }}/tips_image:serverless"
           push: true
