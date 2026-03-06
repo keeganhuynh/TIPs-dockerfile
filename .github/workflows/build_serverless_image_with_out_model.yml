@@ -2,7 +2,7 @@ name: ci
 on:
   push:
     branches:
-      - "build_serverless_image"
+      - "build_serverless_image_with_out_model"
 jobs:
   docker:
     runs-on: ubuntu-latest
