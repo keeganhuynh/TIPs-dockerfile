@@ -14,7 +14,7 @@ WORKDIR /workspace
 
 RUN git clone https://github.com/keeganhuynh/TIPs-containerized.git
 
-WORKDIR /workspace/TIPs-containerized/TIPs
+WORKDIR /workspace/TIPs-containerized
 
 RUN python -m pip install --upgrade pip \
  && pip install "mamba-ssm[causal-conv1d]" --no-build-isolation
