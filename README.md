@@ -12,4 +12,5 @@
 
 # Action check
 
+- March 07, 2026: 11:49 - Increase disk allocation
 - March 06, 2026: 16:07 - Build and push raw image
