@@ -31,7 +31,7 @@
 - **Triggers:**
   - Manual run via `workflow_dispatch`
   - Pushes to branch `build_serverless_image`
-- **Purpose:** Build and push the serverless Docker image using `./Dockerfile.serverless`.
+- **Purpose:** Build and push the serverless Docker image using `Dockerfile.serverless` (from `build_serverless_image.yml`).
 - **Image tag:** `${{ vars.DOCKER_USER }}/tips_image:serverless`
 - **Main steps:**
   1. Checkout source (`actions/checkout@v4`)
