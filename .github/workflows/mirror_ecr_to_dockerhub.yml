@@ -43,13 +43,13 @@ jobs:
 
       - name: Login to Docker Hub with Skopeo
         run: |
-          echo "${{ secrets.DOCKERHUB_TOKEN }}" | \
-          skopeo login --username "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin docker.io
+          echo "${{ vars.DOCKERHUB_TOKEN }}" | \
+          skopeo login --username "${{ vars.DOCKERHUB_USERNAME }}" --password-stdin docker.io
 
       - name: Mirror image from ECR to Docker Hub
         run: |
           SRC="docker://668399498987.dkr.ecr.ap-southeast-1.amazonaws.com/${{ inputs.ecr_repository }}:${{ inputs.image_tag }}"
-          DST="docker://docker.io/${{ secrets.DOCKERHUB_USERNAME }}/${{ inputs.dockerhub_repository }}:${{ inputs.image_tag }}"
+          DST="docker://docker.io/${{ vars.DOCKERHUB_USERNAME }}/${{ inputs.dockerhub_repository }}:${{ inputs.image_tag }}"
           skopeo copy --all "$SRC" "$DST"
 
       - name: Show result
@@ -57,4 +57,4 @@ jobs:
           echo "Mirrored:"
           echo "668399498987.dkr.ecr.ap-southeast-1.amazonaws.com/${{ inputs.ecr_repository }}:${{ inputs.image_tag }}"
           echo "to"
-          echo "${{ secrets.DOCKERHUB_USERNAME }}/${{ inputs.dockerhub_repository }}:${{ inputs.image_tag }}"
+          echo "${{ vars.DOCKERHUB_USERNAME }}/${{ inputs.dockerhub_repository }}:${{ inputs.image_tag }}"
