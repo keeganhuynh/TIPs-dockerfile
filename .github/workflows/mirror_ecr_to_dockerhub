@@ -1,6 +1,9 @@
 name: Mirror ECR to Docker Hub
 
 on:
+  push:
+      branches:
+        - "mirror_ecr_to_dockerhub"
   workflow_dispatch:
     inputs:
       ecr_repository:
