@@ -9,6 +9,11 @@ on:
       docker_pat:
         description: "Docker Hub PAT (optional override)"
         required: false
+      buildx_endpoint:
+        description: "Docker Buildx cloud endpoint (e.g. org/builder)"
+        required: false
+        default: "hhkhanh/tips"
+
   push:
     branches:
       - "build_raw_image"
@@ -20,6 +25,7 @@ jobs:
     env:
       DOCKER_USER: ${{ github.event.inputs.docker_user || secrets.DOCKER_USER }}
       DOCKER_PAT: ${{ github.event.inputs.docker_pat || secrets.DOCKER_PAT }}
+      BUILDX_ENDPOINT: ${{ github.event.inputs.buildx_endpoint || 'hhkhanh/tips' }}
 
     steps:
       - name: Checkout
@@ -35,7 +41,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
         with:
           driver: cloud
-          endpoint: "hhkhanh/tips"
+          endpoint: ${{ env.BUILDX_ENDPOINT }}
 
       - name: Build and push
         uses: docker/build-push-action@v6
