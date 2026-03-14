@@ -34,7 +34,5 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           file: ./Dockerfile
-          tags: ${{ secrets.DOCKER_USER }}/tips_image:raw
+          tags: ${{ secrets.DOCKER_USER }}/tips_image:base
           push: true
-          secrets: |
-            GIT_AUTH_TOKEN=${{ secrets.GH_PAT }}
