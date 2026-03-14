@@ -1,3 +1,5 @@
+# syntax=docker/dockerfile:1.7
+
 # ── Stage 1: Build ──────────────────────────────────────────────
 FROM runpod/pytorch:2.4.0-py3.11-cuda12.4.1-devel-ubuntu22.04 AS builder
 
@@ -7,11 +9,11 @@ ENV PIP_NO_CACHE_DIR=1 \
 RUN apt-get update && apt-get install -y --no-install-recommends git \
     && rm -rf /var/lib/apt/lists/*
 
-# venv inherits base-image PyTorch / CUDA packages
 RUN python -m venv --system-site-packages /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
-RUN git clone --depth 1 https://github.com/huylenq/dentalml.git /dentalml
+RUN --mount=type=secret,id=GIT_AUTH_TOKEN \
+    git clone --depth 1 https://oauth2:$(cat /run/secrets/GIT_AUTH_TOKEN)@github.com/huylenq/dentalml.git /dentalml
 
 WORKDIR /dentalml/vendor/tips
 
