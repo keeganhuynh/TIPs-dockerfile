@@ -29,10 +29,12 @@ jobs:
         with:
           driver: cloud
           endpoint: h2khanh/tips
-
+          
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
           file: ./Dockerfile
-          tags: "h2khanh/tips_image:raw"
+          tags: ${{ secrets.DOCKER_USER }}/tips_image:raw
           push: true
+          secrets: |
+            GIT_AUTH_TOKEN=${{ secrets.GH_PAT }}
