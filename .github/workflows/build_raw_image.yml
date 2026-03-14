@@ -28,6 +28,11 @@ jobs:
       BUILDX_ENDPOINT: ${{ github.event.inputs.buildx_endpoint || 'hhkhanh/tips' }}
 
     steps:
+      - name: Print env variables
+        run: |
+          echo "DOCKER_USER=$DOCKER_USER"
+          echo "BUILDX_ENDPOINT=$BUILDX_ENDPOINT"
+          
       - name: Checkout
         uses: actions/checkout@v4
 
