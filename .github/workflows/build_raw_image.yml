@@ -1,6 +1,7 @@
 name: Build Raw Image
 
-on:
+on: 
+  workflow_dispatch:
   push:
     branches:
       - "build_raw_image"
