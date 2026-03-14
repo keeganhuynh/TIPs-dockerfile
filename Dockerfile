@@ -11,9 +11,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends git \
 RUN python -m venv --system-site-packages /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
-RUN git clone --depth 1 https://github.com/keeganhuynh/TIPs-containerized.git /TIPs
+RUN git clone --depth 1 https://github.com/huylenq/dentalml.git /dentalml
 
-WORKDIR /TIPs
+WORKDIR /dentalml/vendor/tips
 
 RUN pip install --upgrade pip \
     && pip install "mamba-ssm[causal-conv1d]" --no-build-isolation \
@@ -31,6 +31,6 @@ ENV DEBIAN_FRONTEND=noninteractive \
     PATH="/opt/venv/bin:$PATH"
 
 COPY --from=builder /opt/venv /opt/venv
-COPY --from=builder /TIPs /TIPs
+COPY --from=builder /dentalml/vendor/tips /tips
 
-WORKDIR /TIPs
+WORKDIR /tips
