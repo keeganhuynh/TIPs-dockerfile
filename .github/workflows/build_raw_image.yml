@@ -36,3 +36,5 @@ jobs:
           file: ./Dockerfile
           tags: ${{ secrets.DOCKER_USER }}/tips_image:base
           push: true
+          secrets: |
+            GIT_AUTH_TOKEN=${{ secrets.GH_PAT }}
